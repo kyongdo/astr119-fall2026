@@ -24,3 +24,8 @@ dr = dM / (4 * pi * rho * R**2)                                          # m of 
 
 print("dr =", dr, "m per orbit")
 print("orbits left =", R / dr)
+
+P = (a / AU) ** 1.5                  # orbital period, years (Kepler's third law, a in AU)
+death_year = 2026 + P * (R / dr)     # years of orbits left, counted from now
+print("comet dies around year", death_year)
+print("Rest in pieces.")
