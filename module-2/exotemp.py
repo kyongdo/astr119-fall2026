@@ -4,6 +4,8 @@ from math import pi
 import sys
 
 sigma = 5.670374e-8     # Stefan-Boltzmann constant, W/(m^2 K^4)
+L_sun = 3.8e26          # watts per solar luminosity
+AU = 1.496e11           # meters per AU
 
 
 def t_eq(L, d):
@@ -25,8 +27,17 @@ planets = [   # name, luminosity (solar units), distance (AU)
     ["Proxima b",    0.0016,  0.0485],
 ]
 
-
-if __name__ == '__main__':
-    L = float(sys.argv[1])      # stellar luminosity from the command line, W
-    d = float(sys.argv[2])      # star-planet distance from the command line, m
-    print(f"T_eq = {t_eq(L, d):.1f} K")
+for i in range(len(planets)):
+        name = planets[i][0]
+        L_star = planets[i][1] * L_sun # star's luminosity, solar luminosities -> W
+        d_planet = planets[i][2] * AU # star-planet distance, AU -> m
+        
+        # Calculate temperature once to use for both the check and the print
+        temp = t_eq(L_star, d_planet)
+        
+        if temp > 1000:
+            status = "hot"
+        else:
+            status = "temperate"
+            
+        print(f"{name:<14}{temp:>6.0f} K {status}")
