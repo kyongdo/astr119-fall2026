@@ -28,11 +28,28 @@ def legpoly(n,x):
     assert (x >= -1) and (x <= 1), "x must be in [-1,1]" 
 
     # Calculate P_n(x)
-    ### THIS IS WHERE YOU COME IN
-    ### USE AS MANY LINES AS YOU NEED
-    ### USE A FOR LOOP OR WHILE LOOP, WHICHEVER YOU LIKE
-    y = None
-    ###
+    # TODO(human):
+    #   1. Handle the starting cases: what are P_0(x) and P_1(x)?
+    #      What should the function return right away if n is 0 or 1?
+    #   2. Keep two variables for the two most recent polynomials,
+    #      e.g. "previous" = P_{k-1} and "current" = P_k.
+    #   3. Loop k from 1 up to n-1. On each pass, use
+    #        P_{k+1} = ((2k+1) * x * P_k - k * P_{k-1}) / (k+1)
+    #      to compute the next value.
+    #   4. Shift the pair forward: the old "current" becomes "previous",
+    #      and the new value becomes "current".
+    #   5. After the loop, "current" holds P_n(x). Assign it to y.
+    if n == 0:
+        return 1.0
+    if n == 1:
+        return x
+    p_prev = 1.0
+    p_curr = x
+    for k in range(1, n):
+        p_next = ((2*k + 1)*x*p_curr - k*p_prev) / (k + 1)
+        p_prev = p_curr
+        p_curr = p_next
+    y = p_curr
 
     return y
 
