@@ -1,18 +1,12 @@
 # exotemp.py -- equilibrium temperature of a planet around a star (Pod 3).
 # Fast-rotating planet with zero albedo: T = (L / (16 pi sigma d^2))^(1/4). Everything in SI units.
 from math import pi
-import sys
 
-sigma = 5.670374e-8     # Stefan-Boltzmann constant, W/(m^2 K^4)
-L_sun = 3.8e26          # watts per solar luminosity
-AU = 1.496e11           # meters per AU
-
+SIGMA = 5.67e-8          # W m^-2 K^-4
 
 def t_eq(L, d):
-    """Equilibrium temperature in K for luminosity L (W) at distance d (m)."""
-    flux = L / (16 * pi * sigma * d**2)
-    return flux**0.25
-
+    """Equilibrium temperature (K) of a planet at distance d (m) from a star of luminosity L (W)."""
+    return (L / (16 * pi * SIGMA * d**2)) ** 0.25
 
 planets = [   # name, luminosity (solar units), distance (AU)
     ["Earth",        1.0,     1.000],
@@ -29,8 +23,8 @@ planets = [   # name, luminosity (solar units), distance (AU)
 
 for i in range(len(planets)):
         name = planets[i][0]
-        L_star = planets[i][1] * L_sun # star's luminosity, solar luminosities -> W
-        d_planet = planets[i][2] * AU # star-planet distance, AU -> m
+        L_star = planets[i][1] * 3.8e26 # star's luminosity, solar luminosities -> W
+        d_planet = planets[i][2] * 1.496e11 # star-planet distance, AU -> m
         
         # Calculate temperature once to use for both the check and the print
         temp = t_eq(L_star, d_planet)
