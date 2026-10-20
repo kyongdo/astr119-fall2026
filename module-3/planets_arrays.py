@@ -39,3 +39,19 @@ if __name__ == "__main__":
 
     print("Hot planet names:")
     print(names[hot])
+
+ # Task 2: Text thermometer
+    print("\nPlanet Temperature Thermometer")
+    print("Each # represents 100 K")
+
+    for i in range(len(names)):
+        bars = "#" * int(T[i] // 100)
+
+        if T[i] > 1000:
+            status = "VERY HOT!"
+        elif T[i] >= 373:
+            status = "Above water's boiling point"
+        else:
+            status = "Below water's boiling point"
+
+        print(f"{names[i]:14s} {bars} {T[i]:.1f} K - {status}")
