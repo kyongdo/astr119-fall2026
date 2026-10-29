@@ -22,5 +22,25 @@ if __name__ == "__main__":
     T = t_eq(lum * L_SUN, dist * AU)
     fig, ax = plt.subplots()
     ax.scatter(dist, T)
+
+
+    ax.set_xlabel("Distance from star (AU)")
+    ax.set_ylabel("Equilibrium temperature (K)")
+    ax.set_title("Planet Temperatures vs. Distance")
+
+    
+    d = np.linspace(0.01, 2.0, 200)
+    T_curve = t_eq(L_SUN, d * AU)
+    ax.plot(d, T_curve)
+
+   
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+
+   
+    for n, x, y in zip(name, dist, T):
+        ax.annotate(n, (x, y), fontsize=7)
+
     fig.savefig("module-4/planets.png", dpi=150)
     print("wrote module-4/planets.png")
+
