@@ -25,6 +25,7 @@ def pixelfix(I):
                 I[i, j, 2] == 0):
 
                 bad_count += 1
+                I[i, j] = [1, 1, 1]   # paint the bad pixel white
 
     print("Bad pixels found:", bad_count)
 
