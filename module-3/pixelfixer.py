@@ -12,20 +12,24 @@ from matplotlib.pyplot import imread, imsave
 
 
 def pixelfix(I):
-    """Replace bad pixels with the color averaged from their neighbors.
 
-    Parameters
-    ----------
-    I : ndarray, shape (M, N, 3)
-        A color image array in RGB format, values between 0 and 1.
-        A bad pixel has red = 1, green = 0, blue = 0.
+    rows, cols, colors = I.shape
 
-    Returns
-    -------
-    Iq : ndarray, same shape as I
-        A copy of the image with the bad pixels fixed.
-    """
-    Iq = I.copy()
+    bad_count = 0
+
+    for i in range(rows):
+        for j in range(cols):
+
+            if (I[i, j, 0] == 1 and
+                I[i, j, 1] == 0 and
+                I[i, j, 2] == 0):
+
+                bad_count += 1
+
+    print("Bad pixels found:", bad_count)
+
+    return I
+
 
     ### YOUR WORK GOES HERE (with the agent, under the Protocol, in stages:
     ### 1. find the bad pixels and print how many;

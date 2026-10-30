@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 SIGMA = 5.67e-8          # Stefan-Boltzmann constant, W m^-2 K^-4
 L_SUN = 3.8e26           # solar luminosity, W
 AU = 1.496e11            # meters per AU
+L_STAR2 = 1.9e26         # Making the curve with half the luminosity 
 
 name = np.array(["Earth", "Mars", "HD 209458 b", "51 Peg b", "TRAPPIST-1 e",
                  "Kepler-22 b", "55 Cnc e", "HD 189733 b", "Kepler-452 b", "Proxima b"])
@@ -33,13 +34,17 @@ if __name__ == "__main__":
     T_curve = t_eq(L_SUN, d * AU)
     ax.plot(d, T_curve)
 
-   
+    T_half = t_eq(0.5 * L_SUN, d * AU)
+    ax.plot(d, T_half, label="Half Sun luminosity",
+
     ax.set_xscale("log")
     ax.set_yscale("log")
 
    
     for n, x, y in zip(name, dist, T):
-        ax.annotate(n, (x, y), fontsize=7)
+        ax.annotate(n, (x, y), fontsize=7)\
+
+    ax.legend()
 
     fig.savefig("module-4/planets.png", dpi=150)
     print("wrote module-4/planets.png")
