@@ -11,25 +11,32 @@ import numpy as np
 from matplotlib.pyplot import imread, imsave
 
 
+
+
 def pixelfix(I):
 
     rows, cols, colors = I.shape
 
-    bad_count = 0
+    fixed = I.copy()
 
-    for i in range(rows):
-        for j in range(cols):
+    for i in range(1, rows - 1):
+        for j in range(1, cols - 1):
 
             if (I[i, j, 0] == 1 and
                 I[i, j, 1] == 0 and
                 I[i, j, 2] == 0):
 
-                bad_count += 1
-                I[i, j] = [1, 1, 1]   # paint the bad pixel white
+                up = I[i - 1, j]
+                down = I[i + 1, j]
+                left = I[i, j - 1]
+                right = I[i, j + 1]
 
-    print("Bad pixels found:", bad_count)
+                average = (up + down + left + right) / 4
 
-    return I
+                fixed[i, j] = average
+
+    return fixed
+
 
 
     ### YOUR WORK GOES HERE (with the agent, under the Protocol, in stages:
