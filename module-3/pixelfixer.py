@@ -19,19 +19,25 @@ def pixelfix(I):
 
     fixed = I.copy()
 
-    for i in range(1, rows - 1):
-        for j in range(1, cols - 1):
+    for i in range(rows):
+        for j in range(cols):
 
             if (I[i, j, 0] == 1 and
                 I[i, j, 1] == 0 and
                 I[i, j, 2] == 0):
 
-                up = I[i - 1, j]
-                down = I[i + 1, j]
-                left = I[i, j - 1]
-                right = I[i, j + 1]
+                # keep only the neighbors that are inside the image
+                neighbors = []
+                if i > 0:
+                    neighbors.append(I[i - 1, j])   # up
+                if i < rows - 1:
+                    neighbors.append(I[i + 1, j])   # down
+                if j > 0:
+                    neighbors.append(I[i, j - 1])   # left
+                if j < cols - 1:
+                    neighbors.append(I[i, j + 1])   # right
 
-                average = (up + down + left + right) / 4
+                average = sum(neighbors) / len(neighbors)
 
                 fixed[i, j] = average
 
