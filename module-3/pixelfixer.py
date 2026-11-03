@@ -1,3 +1,4 @@
+
 #------------------------------------------------------------------------------
 # pixelfixer.py: a command-line utility that fixes red-corrupted pixels in an
 # RGB image.
@@ -6,11 +7,10 @@
 #   python pixelfixer.py easy_corrupt_io_small.png
 # which writes fixed_easy_corrupt_io_small.png next to the input.
 #------------------------------------------------------------------------------
+
 import sys
 import numpy as np
 from matplotlib.pyplot import imread, imsave
-
-
 
 
 def pixelfix(I):
@@ -26,32 +26,31 @@ def pixelfix(I):
                 I[i, j, 1] == 0 and
                 I[i, j, 2] == 0):
 
-                # keep only the neighbors that are inside the image
                 neighbors = []
-                if i > 0:
-                    neighbors.append(I[i - 1, j])   # up
-                if i < rows - 1:
-                    neighbors.append(I[i + 1, j])   # down
-                if j > 0:
-                    neighbors.append(I[i, j - 1])   # left
-                if j < cols - 1:
-                    neighbors.append(I[i, j + 1])   # right
 
-                average = sum(neighbors) / len(neighbors)
+                if i > 0:
+                    neighbors.append(I[i - 1, j])
+
+                if i < rows - 1:
+                    neighbors.append(I[i + 1, j])
+
+                if j > 0:
+                    neighbors.append(I[i, j - 1])
+
+                if j < cols - 1:
+                    neighbors.append(I[i, j + 1])
+
+                average = np.mean(neighbors, axis=0)
 
                 fixed[i, j] = average
 
     return fixed
 
-
-
-    ### YOUR WORK GOES HERE (with the agent, under the Protocol, in stages:
-    ### 1. find the bad pixels and print how many;
-    ### 2. paint them white and look at the result;
-    ### 3. replace the white with the average of the up/down/left/right
-    ###    neighbors. Then try solo_corrupt_io_small.png.)
-
-    return Iq
+### YOUR WORK GOES HERE (with the agent, under the Protocol, in stages:
+### 1. Bad Pixels found: 4840
+### 2. Every red dot becomes white (same spots)
+### 3. The dots blend into their surroundings (623 still differ from the
+###    clean image by more than 0.02)
 
 
 def _main():
@@ -64,3 +63,4 @@ def _main():
 
 if __name__ == '__main__':
     _main()
+
