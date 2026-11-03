@@ -36,6 +36,7 @@ if __name__ == "__main__":
 
     T_half = t_eq(0.5 * L_SUN, d * AU)
     ax.plot(d, T_half, label="Half Sun luminosity",
+            linestyle="--")
 
     ax.set_xscale("log")
     ax.set_yscale("log")
