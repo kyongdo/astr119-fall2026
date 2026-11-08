@@ -17,7 +17,7 @@ def product_remaining(r, R_new=3):
     -------
     Current remaining length as fraction of original length of new roll.
     """
-    return 0 ### REPLACE WITH CORRECT FORMULA
+    return (r**2 - 1) / (R_new**2 - 1)
 
 def product_visible(el_frac, R_new=3):
     """Visible roll radius by fraction of remaining product.
@@ -34,7 +34,7 @@ def product_visible(el_frac, R_new=3):
     Current visible radius of roll, in units of r0, the cardboard cylinder
     radius.
     """
-    return 0 ### REPLACE WITH CORRECT FORMULA
+    return np.sqrt(el_frac * (R_new**2 - 1) + 1)
 
 def visualize_danger(n, R_new=3, saveas=''):
     """Use n line segments of equal product to visualize paradox of the roll.
