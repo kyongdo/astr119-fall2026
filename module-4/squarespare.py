@@ -66,7 +66,7 @@ def visualize_danger(n, R_new=3, saveas=''):
     for radius in radii:
         x = radius * np.cos(theta)
         y = radius * np.sin(theta)
-        plt.plot(x, y)
+        plt.plot(x, y, color="navy", linewidth=2)
 
 
     # Do the core plotting commands here
@@ -78,6 +78,10 @@ def visualize_danger(n, R_new=3, saveas=''):
 
     # Stylize and annotate
     ## things like axes labels, font sizes, or any other finishing touches
+
+    plt.title(f"Squares to Spare: {n} Equal Paper Segments", fontsize=14)
+    plt.xlabel("Horizontal position (core radii)")
+    plt.ylabel("Vertical position (core radii)")
 
     ######################
 
